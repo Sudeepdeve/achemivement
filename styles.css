@@ -1,0 +1,234 @@
+/* CSS Variables */
+:root {
+    --bg-color: #f0f2f5;
+    /* Facebook-like light gray for better contrast with white cards */
+    --text-color: #1a1a1a;
+    --card-bg: #ffffff;
+    --card-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), 0 4px 12px rgba(0, 0, 0, 0.05);
+    /* Softer, modern shadow */
+    --card-hover-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    --primary-color: #2563eb;
+    --secondary-color: #64748b;
+    --border-color: #e2e8f0;
+    --header-height: 70px;
+    --font-heading: 'Inter', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --transition-speed: 0.3s;
+}
+
+/* Dark Mode Variables */
+body.dark-mode {
+    --bg-color: #0f172a;
+    --text-color: #f1f5f9;
+    --card-bg: #1e293b;
+    --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+    --card-hover-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+    --primary-color: #60a5fa;
+    --secondary-color: #94a3b8;
+    --border-color: #334155;
+}
+
+/* Reset & Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.2s;
+}
+
+ul {
+    list-style: none;
+}
+
+button {
+    cursor: pointer;
+    font-family: inherit;
+    border: none;
+    background: none;
+}
+
+.container {
+    max-width: 1400px;
+    /* Wider container for the gallery */
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header & Navigation */
+.main-header {
+    height: var(--header-height);
+    background-color: var(--card-bg);
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    transition: background-color var(--transition-speed), border-color var(--transition-speed);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.logo {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-color);
+}
+
+.nav-links {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+}
+
+#theme-toggle {
+    font-size: 1.2rem;
+    padding: 8px;
+    border-radius: 50%;
+    transition: background-color 0.2s;
+    color: var(--text-color);
+}
+
+#theme-toggle:hover {
+    background-color: var(--bg-color);
+}
+
+/* Achievements Section */
+.achievements-section {
+    padding: 40px 0;
+}
+
+.section-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    gap: 20px;
+}
+
+.section-header h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+/* Filters */
+.category-filters {
+    display: flex;
+    gap: 10px;
+}
+
+.filter-btn {
+    padding: 6px 16px;
+    border-radius: 999px;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    color: var(--secondary-color);
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.filter-btn:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    transform: translateY(-1px);
+}
+
+.filter-btn.active {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    border-color: var(--primary-color);
+}
+
+/* Grid Layout */
+/* We use a centered layout that mimics a feed */
+.achievements-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+}
+
+/* Cards */
+.card {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    /* We focus on width. Facebook embeds are usually 500px wide. */
+    width: 100%;
+    max-width: 500px;
+    /* Constrain max width to standard FB embed size */
+
+    /* Center text if any leftovers */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    border: 1px solid var(--border-color);
+    padding: 0;
+    /* No padding, clean look */
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--card-hover-shadow);
+}
+
+/* Iframe Handling */
+.card iframe {
+    display: block;
+    width: 100%;
+    /* Height is usually controlled by the embed code, but we ensure it doesn't overflow weirdly */
+    border: none;
+    overflow: hidden;
+}
+
+/* Footer */
+.main-footer {
+    padding: 40px 0;
+    text-align: center;
+    color: var(--secondary-color);
+    font-size: 0.9rem;
+    margin-top: 40px;
+}
+
+/* Entry Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card {
+    animation: fadeIn 0.6s ease-out forwards;
+}
